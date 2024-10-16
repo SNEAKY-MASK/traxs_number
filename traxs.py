@@ -1,8 +1,14 @@
 import requests
 import time
-import json
+import folium
 
-def track_location_by_phone_number(phone_number):
+def track_location(phone_number):
+    """Tracks the real-time location of a phone number using the Google Maps Geocoding API.
+
+    Args:
+        phone_number (str): The phone number to track.
+    """
+
     # Replace with your Google Maps Geocoding API key
     api_key = "YOUR_API_KEY"
 
@@ -22,11 +28,16 @@ def track_location_by_phone_number(phone_number):
             location = data["results"][0]["geometry"]["location"]
             latitude, longitude = location["lat"], location["lng"]
 
-            # Generate Google Maps link
-            maps_link = f"https://www.google.com/maps?q={latitude},{longitude}"
+            # Create a map centered on the location
+            m = folium.Map(location=[latitude, longitude])
 
-            # Process location data and update visualization
-            # ...
+            # Add a marker to the map
+            folium.Marker([latitude, longitude], popup="Target Location").add_to(m)
+
+            # Save the map as an HTML file
+            m.save("location.html")
+
+            print("Location updated.")
 
         except Exception as e:
             print(f"Error: {e}")
@@ -38,4 +49,4 @@ def track_location_by_phone_number(phone_number):
 phone_number = input("Enter the phone number: ")
 
 # Call the tracking function
-track_location_by_phone_number(phone_number)
+track_location(phone_number)
