@@ -1,7 +1,6 @@
 import requests
 import time
 import json
-import geopy
 
 def track_location_by_phone_number(phone_number):
     # Replace with your Google Maps Geocoding API key
