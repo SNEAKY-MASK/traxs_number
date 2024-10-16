@@ -57,5 +57,4 @@ def main():
 
         time.sleep(update_interval)  # Adjust update interval as needed
 
-if __name__ == "__main__":
-    main()
+
